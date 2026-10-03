@@ -1,0 +1,36 @@
+{% extends 'customers/base.html' %}
+
+{% block title %}Delete Customer{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card card-custom border-top border-danger border-4">
+      <div class="card-body text-center p-5">
+
+        <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size:3.5rem;"></i>
+        <h3 class="page-title mt-3">Delete this customer?</h3>
+
+        <p class="text-secondary mb-1">You are about to permanently delete:</p>
+        <p class="fs-5 fw-semibold mb-1">{{ customer.FULL_NAME }}</p>
+        <p class="text-secondary">Claim ID: {{ customer.CLAIM_ID }} &nbsp;|&nbsp; CNIC: {{ customer.CNIC }}</p>
+
+        <div class="alert alert-danger py-2 small">
+          This action cannot be undone.
+        </div>
+
+        <form method="post" class="d-flex justify-content-center gap-2">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger px-4">
+            <i class="bi bi-trash me-1"></i>Yes, delete
+          </button>
+          <a href="{% url 'customer_list' %}" class="btn btn-outline-secondary px-4">Cancel</a>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
