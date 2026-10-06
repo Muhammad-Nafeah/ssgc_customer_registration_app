@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,6 +88,8 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
+if os.getenv('DB_SSL_CA'):
+    DATABASES['default']['OPTIONS'] = {'ssl': {'ca': os.getenv('DB_SSL_CA')}}
 
 
 # Password validation
@@ -142,3 +145,11 @@ LOGIN_REDIRECT_URL = 'customer_list'
 LOGOUT_REDIRECT_URL = 'login'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Behind Render's HTTPS proxy
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
