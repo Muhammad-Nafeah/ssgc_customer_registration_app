@@ -1,9 +1,3 @@
-CREATE DATABASE IF NOT EXISTS ssgc_db
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
-
-USE ssgc_db;
-
 CREATE TABLE `customer_registration` (
   `UR_CONSUMER_S_NO` int unsigned NOT NULL AUTO_INCREMENT,
   `CLAIM_ID` varchar(19) NOT NULL,
@@ -47,8 +41,5 @@ CREATE TABLE `customer_registration` (
   `SP_ID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`CLAIM_ID`),
   UNIQUE KEY `uq_sno` (`UR_CONSUMER_S_NO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE USER IF NOT EXISTS 'ssgc_user'@'localhost' IDENTIFIED BY 'CHANGE_ME';
-GRANT ALL PRIVILEGES ON ssgc_db.* TO 'ssgc_user'@'localhost';
-FLUSH PRIVILEGES;
